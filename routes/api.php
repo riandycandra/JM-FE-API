@@ -28,30 +28,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->group(function() {
     Route::apiResource('ruas', RuasController::class);
 });
-
-Route::post('test', function() {
-
-    $file = request()->file;
-
-    $file->move(public_path('temp'), $file->getClientOriginalName());
-
-    $storage = new StorageClient([
-        'keyFilePath' => base_path() . '/service_account.json',
-    ]);
-    $bucketName = env('GOOGLE_CLOUD_STORAGE_BUCKET');
-    $bucket = $storage->bucket($bucketName);
-
-    $filePath = public_path('temp/' . $file->getClientOriginalName());
-
-    $rand = Uuid::uuid4() . "." . $file->getClientOriginalExtension();
-
-    $object = $bucket->upload(
-        fopen($filePath, 'r'), [
-            'name' => 'candidate-files/' . $rand
-        ]
-    );
-
-    Storage::delete($filePath);
-
-    return "https://storage.googleapis.com/exam-fe-jasamarga/candidate-files/{$rand}";
-});
