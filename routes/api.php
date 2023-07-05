@@ -6,6 +6,7 @@ use Google\Cloud\Storage\StorageClient;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RuasController;
+use App\Http\Controllers\UnitController;
 use Ramsey\Uuid\Uuid;
 
 /*
@@ -27,4 +28,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->group(function() {
     Route::apiResource('ruas', RuasController::class);
+
+    Route::get('unit', [UnitController::class, 'index']);
 });
