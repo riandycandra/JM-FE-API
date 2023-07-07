@@ -28,6 +28,13 @@ class RuasController extends Controller
      */
     public function index(Request $request)
     {
+
+        if($request->show == 'active_only') {
+            $data = Ruas::where('status', '1')->get();
+
+            return $this->successResponse($data);
+        }
+
         $perPage = is_numeric($request->per_page) ? $request->per_page : 5;
         return Ruas::orderBy('id', 'desc')->paginate($perPage);
     }
