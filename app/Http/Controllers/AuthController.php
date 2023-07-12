@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+use App\Traits\ApiResponses;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ResetPasswordRequest;
-use App\Traits\ApiResponses;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ResetPasswordRequest;
 
 class AuthController extends Controller
 {
@@ -47,7 +48,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth()->invalidate(true);
 
         return response()->json([
             'status' => true,

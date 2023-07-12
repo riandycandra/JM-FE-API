@@ -27,6 +27,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->group(function() {
+    Route::post('logout', [AuthController::class, 'logout']);
+
     Route::apiResource('ruas', RuasController::class);
 
     Route::get('unit', [UnitController::class, 'index']);
