@@ -11,4 +11,8 @@ class RuasCoordinates extends Model
 
     protected $table = 'ruas_coordinates';
     protected $primaryKey = 'id';
+    protected $fillable = [
+        'ordering',
+        'coordinates'
+    ];
 }

@@ -10,6 +10,7 @@ use App\Service\UploadService;
 use App\Http\Requests\RuasRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\UpdateRuasRequest;
+use App\Models\RuasCoordinates;
 use GuzzleHttp\Client;
 use Throwable;
 
@@ -58,9 +59,22 @@ class RuasController extends Controller
 
         $unit = Unit::find($request->unit_id);
 
+        $coords = [];
+
+        if($request->coordinates) {
+            foreach($request->coordinates as $ordering => $coord) {
+                $coords[] = new RuasCoordinates([
+                    'ordering' => $ordering,
+                    'coordinates' => $coord
+                ]);
+            }
+        }
+
         $ruas->unit()->associate($unit);
 
         $ruas->save();
+
+        $ruas->coordinates()->saveMany($coords);
 
         return $this->createdResponse($ruas);
     }
@@ -70,7 +84,7 @@ class RuasController extends Controller
      */
     public function show(string $id)
     {
-        $data = Ruas::where('id', $id)->first();
+        $data = Ruas::where('id', $id)->with('coordinates', 'unit')->first();
 
         if($data == null) {
             return $this->errorResponse($data, __('crud.failed.get'), 404);
@@ -85,7 +99,7 @@ class RuasController extends Controller
     public function update(UpdateRuasRequest $request, string $id)
     {
         try {
-            $ruas = Ruas::where('id', $id)->first();
+            $ruas = Ruas::where('id', $id)->with('coordinates')->first();
         } catch (Exception|QueryException $e) {
             return $this->errorResponse([], 'Data not found.', 404);
         }
@@ -108,6 +122,21 @@ class RuasController extends Controller
         $ruas->unit()->associate($unit);
 
         $ruas->save();
+
+        $ruas->coordinates()->delete();
+
+        $coords = [];
+
+        if($request->coordinates) {
+            foreach($request->coordinates as $ordering => $coord) {
+                $coords[] = new RuasCoordinates([
+                    'ordering' => $ordering,
+                    'coordinates' => $coord
+                ]);
+            }
+        }
+
+        $ruas->coordinates()->saveMany($coords);
 
         return $this->successResponse($ruas, message: __('crud.success.update'));
     }
