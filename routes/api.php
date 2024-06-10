@@ -33,3 +33,5 @@ Route::middleware('auth:api')->group(function() {
 
     Route::get('unit', [UnitController::class, 'index']);
 });
+
+Route::post('/ruas/generate-routes', [RuasController::class, 'routes']);

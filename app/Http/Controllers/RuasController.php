@@ -10,6 +10,8 @@ use App\Service\UploadService;
 use App\Http\Requests\RuasRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\UpdateRuasRequest;
+use GuzzleHttp\Client;
+use Throwable;
 
 class RuasController extends Controller
 {
@@ -128,5 +130,39 @@ class RuasController extends Controller
         $ruas->delete();
 
         return $this->successResponse([], message: __('crud.success.delete'));
+    }
+
+    function routes(Request $request) {
+        $coord = [];
+
+        if($request->lnglat) {
+            foreach($request->lnglat as $row) {
+                $split = \explode(',', $row);
+
+                $coord[] = [$split[1], $split[0]];
+            }
+        }
+
+        try {
+
+            $client = new Client();
+            $response = $client->request('POST', 'https://api.openrouteservice.org/v2/directions/driving-car/geojson', [
+                'body' => \json_encode(
+                    [
+                        'coordinatesa' => $coord
+                    ]
+                ),
+                'headers' => [
+                    'Accept'        => 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+                    'Authorization' => config('constants.api_key_ors'),
+                    'Content-Type'  => 'application/json; charset=utf-8'
+                ]
+            ]);
+
+            return $response->getBody();
+
+        } catch (Throwable $e) {
+            return $this->errorResponse($e->getMessage(), __('crud.failed.get'), $e->getCode());
+        }
     }
 }
