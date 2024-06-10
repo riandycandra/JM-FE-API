@@ -149,7 +149,7 @@ class RuasController extends Controller
             $response = $client->request('POST', 'https://api.openrouteservice.org/v2/directions/driving-car/geojson', [
                 'body' => \json_encode(
                     [
-                        'coordinatesa' => $coord
+                        'coordinates' => $coord
                     ]
                 ),
                 'headers' => [
