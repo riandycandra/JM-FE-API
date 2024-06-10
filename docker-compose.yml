@@ -1,8 +1,32 @@
-version: '3'
+version: '3.8'
+
 services:
-    web:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-        - '8004:8181'
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8004:8181'
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_NAME: mydatabase
+      DATABASE_USER: myuser
+      DATABASE_PASSWORD: mypassword
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: dummy_password
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: user_mysql
+      MYSQL_PASSWORD: pass_mysql
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

@@ -1,6 +1,9 @@
 #! /bin/sh
 set -e
 cd /var/www/html && git config --add --system http.sslVerify false
+php /var/www/html/artisan key:generate
+php /var/www/html/artisan jwt:secret
+php /var/www/html/artisan migrate:refresh --seed
 service nginx start
 /usr/bin/supervisord &
 php-fpm

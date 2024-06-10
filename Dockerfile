@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache \
-    && docker-php-ext-install pdo_pgsql
+    && docker-php-ext-install pdo_mysql
 
 ENV TZ="Asia/Jakarta"
 
@@ -37,6 +37,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 COPY . /var/www/html
 WORKDIR /var/www/html
+
+RUN cp .env.example .env
 
 RUN chmod +rx /usr/local/bin/composer
 
