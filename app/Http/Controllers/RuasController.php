@@ -53,28 +53,28 @@ class RuasController extends Controller
         $ruas->long      = $request->long;
         $ruas->km_awal   = $request->km_awal;
         $ruas->km_akhir  = $request->km_akhir;
-        // $ruas->photo_url = $this->service->uploadFile($request->photo);
-        // $ruas->doc_url   = $this->service->uploadFile($request->file);
+        $ruas->photo_url = $this->service->uploadFile($request->photo);
+        $ruas->doc_url   = $this->service->uploadFile($request->file);
         $ruas->status    = $request->status;
 
         $unit = Unit::find($request->unit_id);
 
-        $coords = [];
+        // $coords = [];
 
-        if($request->coordinates) {
-            foreach($request->coordinates as $ordering => $coord) {
-                $coords[] = new RuasCoordinates([
-                    'ordering' => $ordering,
-                    'coordinates' => $coord
-                ]);
-            }
-        }
+        // if($request->coordinates) {
+        //     foreach($request->coordinates as $ordering => $coord) {
+        //         $coords[] = new RuasCoordinates([
+        //             'ordering' => $ordering,
+        //             'coordinates' => $coord
+        //         ]);
+        //     }
+        // }
 
         $ruas->unit()->associate($unit);
 
         $ruas->save();
 
-        $ruas->coordinates()->saveMany($coords);
+        // $ruas->coordinates()->saveMany($coords);
 
         return $this->createdResponse($ruas);
     }
@@ -114,8 +114,8 @@ class RuasController extends Controller
         $ruas->km_akhir  = $request->km_akhir;
         $ruas->status    = $request->status;
 
-        // $ruas->photo_url = ($request->photo == null ? $ruas->photo_url : $this->service->uploadFile($request->photo));
-        // $ruas->doc_url   = ($request->file == null ? $ruas->doc_url : $this->service->uploadFile($request->file));
+        $ruas->photo_url = ($request->photo == null ? $ruas->photo_url : $this->service->uploadFile($request->photo));
+        $ruas->doc_url   = ($request->file == null ? $ruas->doc_url : $this->service->uploadFile($request->file));
 
         $unit = Unit::find($request->unit_id);
 
@@ -123,20 +123,20 @@ class RuasController extends Controller
 
         $ruas->save();
 
-        $ruas->coordinates()->delete();
+        // $ruas->coordinates()->delete();
 
-        $coords = [];
+        // $coords = [];
 
-        if($request->coordinates) {
-            foreach($request->coordinates as $ordering => $coord) {
-                $coords[] = new RuasCoordinates([
-                    'ordering' => $ordering,
-                    'coordinates' => $coord
-                ]);
-            }
-        }
+        // if($request->coordinates) {
+        //     foreach($request->coordinates as $ordering => $coord) {
+        //         $coords[] = new RuasCoordinates([
+        //             'ordering' => $ordering,
+        //             'coordinates' => $coord
+        //         ]);
+        //     }
+        // }
 
-        $ruas->coordinates()->saveMany($coords);
+        // $ruas->coordinates()->saveMany($coords);
 
         return $this->successResponse($ruas, message: __('crud.success.update'));
     }
@@ -156,7 +156,7 @@ class RuasController extends Controller
             return $this->errorResponse($ruas, __('crud.failed.update'), 404);
         }
 
-        $ruas->delete();
+        $ruas->update(['status' => '0']);
 
         return $this->successResponse([], message: __('crud.success.delete'));
     }

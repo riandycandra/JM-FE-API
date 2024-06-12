@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Google\Cloud\Storage\StorageClient;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/refresh', function() {
+    Artisan::call('migrate:refresh --seed');
+});

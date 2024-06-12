@@ -14,6 +14,10 @@ class Ruas extends Model
 	protected $table = 'ruas';
 	protected $primaryKey = 'id';
 
+    protected $fillable = [
+        'status'
+    ];
+
     public function unit(): BelongsTo {
         return $this->belongsTo(Unit::class, 'unit_id');
     }
