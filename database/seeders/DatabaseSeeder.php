@@ -47,25 +47,13 @@ class DatabaseSeeder extends Seeder
         foreach($ruas as $r) {
             \App\Models\Ruas::create([
                 'unit_id' => '1',
-                'ruas_name' => 'Jakarta Bogor Ciawi',
+                'ruas_name' => $r,
                 'long' => '34',
                 'km_awal' => '1',
                 'km_akhir' => '34',
                 'status' => '1',
-            ]);
-        }
-
-        $coords = [
-            '-6.307002,106.894675',
-            '-6.278520,106.959314',
-            '-6.253667,106.991748',
-        ];
-
-        foreach($coords as $ordering => $c) {
-            \App\Models\RuasCoordinates::create([
-                'ruas_id' => '1',
-                'ordering' => $ordering,
-                'coordinates' => $c,
+                'photo_url' => 'test.jpg',
+                'doc_url' => 'test.pdf',
             ]);
         }
     }

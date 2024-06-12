@@ -10,7 +10,6 @@ use App\Service\UploadService;
 use App\Http\Requests\RuasRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\UpdateRuasRequest;
-use App\Models\RuasCoordinates;
 use GuzzleHttp\Client;
 use Throwable;
 
@@ -33,7 +32,7 @@ class RuasController extends Controller
     {
 
         if($request->show == 'active_only') {
-            $data = Ruas::where('status', '1')->with('coordinates')->get();
+            $data = Ruas::where('status', '1')->get();
 
             return $this->successResponse($data);
         }
@@ -84,7 +83,7 @@ class RuasController extends Controller
      */
     public function show(string $id)
     {
-        $data = Ruas::where('id', $id)->with('coordinates', 'unit')->first();
+        $data = Ruas::where('id', $id)->with('unit')->first();
 
         if($data == null) {
             return $this->errorResponse($data, __('crud.failed.get'), 404);
@@ -99,7 +98,7 @@ class RuasController extends Controller
     public function update(UpdateRuasRequest $request, string $id)
     {
         try {
-            $ruas = Ruas::where('id', $id)->with('coordinates')->first();
+            $ruas = Ruas::where('id', $id)->first();
         } catch (Exception|QueryException $e) {
             return $this->errorResponse([], 'Data not found.', 404);
         }

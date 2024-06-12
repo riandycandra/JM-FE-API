@@ -21,8 +21,4 @@ class Ruas extends Model
     public function unit(): BelongsTo {
         return $this->belongsTo(Unit::class, 'unit_id');
     }
-
-    public function coordinates(): HasMany {
-        return $this->hasMany(RuasCoordinates::class, 'ruas_id');
-    }
 }
