@@ -155,7 +155,7 @@ class RuasController extends Controller
             return $this->errorResponse($ruas, __('crud.failed.update'), 404);
         }
 
-        $ruas->update(['status' => '0']);
+        $ruas->delete();
 
         return $this->successResponse([], message: __('crud.success.delete'));
     }
