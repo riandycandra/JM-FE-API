@@ -5,5 +5,4 @@ php /var/www/html/artisan key:generate
 php /var/www/html/artisan jwt:secret
 php /var/www/html/artisan migrate:refresh --seed
 service nginx start
-/usr/bin/supervisord &
 php-fpm
