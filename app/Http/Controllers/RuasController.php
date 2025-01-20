@@ -85,7 +85,7 @@ class RuasController extends Controller
      */
     public function show(string $id)
     {
-        $data = Ruas::where('id', $id)->with('unit')->first();
+        $data = Ruas::where('id', $id)->with('unit', 'coordinates')->first();
 
         if($data == null) {
             return $this->errorResponse($data, __('crud.failed.get'), 404);
