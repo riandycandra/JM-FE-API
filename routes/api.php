@@ -2,12 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Google\Cloud\Storage\StorageClient;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RuasController;
 use App\Http\Controllers\UnitController;
-use Ramsey\Uuid\Uuid;
 
 /*
 |--------------------------------------------------------------------------

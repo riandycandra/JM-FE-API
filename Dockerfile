@@ -28,8 +28,6 @@ RUN apt-get update && apt-get install -y \
 
 ENV TZ="Asia/Jakarta"
 
-RUN apt-get install supervisor -y
-
 RUN apt-get install -y nginx  && \
     rm -rf /var/lib/apt/lists/*
 
