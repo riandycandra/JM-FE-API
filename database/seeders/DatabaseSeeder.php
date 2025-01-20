@@ -54,5 +54,19 @@ class DatabaseSeeder extends Seeder
                 'status' => '1',
             ]);
         }
+
+        $coords = [
+            '-6.307002,106.894675',
+            '-6.278520,106.959314',
+            '-6.253667,106.991748',
+        ];
+
+        foreach($coords as $ordering => $c) {
+            \App\Models\RuasCoordinates::create([
+                'ruas_id' => '1',
+                'ordering' => $ordering,
+                'coordinates' => $c,
+            ]);
+        }
     }
 }
