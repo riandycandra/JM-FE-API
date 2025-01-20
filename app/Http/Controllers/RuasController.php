@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Throwable;
 use App\Models\Ruas;
 use App\Models\Unit;
+use GuzzleHttp\Client;
 use App\Traits\ApiResponses;
 use Illuminate\Http\Request;
 use App\Service\UploadService;
+use App\Models\RuasCoordinates;
 use App\Http\Requests\RuasRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\UpdateRuasRequest;
-use App\Models\RuasCoordinates;
-use GuzzleHttp\Client;
-use Throwable;
 
 class RuasController extends Controller
 {
