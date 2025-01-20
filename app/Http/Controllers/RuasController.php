@@ -14,8 +14,6 @@ use App\Models\RuasCoordinates;
 use App\Http\Requests\RuasRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\UpdateRuasRequest;
-use GuzzleHttp\Client;
-use Throwable;
 
 class RuasController extends Controller
 {
@@ -62,16 +60,16 @@ class RuasController extends Controller
 
         $unit = Unit::find($request->unit_id);
 
-        // $coords = [];
+        $coords = [];
 
-        // if($request->coordinates) {
-        //     foreach($request->coordinates as $ordering => $coord) {
-        //         $coords[] = new RuasCoordinates([
-        //             'ordering' => $ordering,
-        //             'coordinates' => $coord
-        //         ]);
-        //     }
-        // }
+        if($request->coordinates) {
+            foreach($request->coordinates as $ordering => $coord) {
+                $coords[] = new RuasCoordinates([
+                    'ordering' => $ordering,
+                    'coordinates' => $coord
+                ]);
+            }
+        }
 
         $ruas->unit()->associate($unit);
 
@@ -126,20 +124,20 @@ class RuasController extends Controller
 
         $ruas->save();
 
-        // $ruas->coordinates()->delete();
+        $ruas->coordinates()->delete();
 
-        // $coords = [];
+        $coords = [];
 
-        // if($request->coordinates) {
-        //     foreach($request->coordinates as $ordering => $coord) {
-        //         $coords[] = new RuasCoordinates([
-        //             'ordering' => $ordering,
-        //             'coordinates' => $coord
-        //         ]);
-        //     }
-        // }
+        if($request->coordinates) {
+            foreach($request->coordinates as $ordering => $coord) {
+                $coords[] = new RuasCoordinates([
+                    'ordering' => $ordering,
+                    'coordinates' => $coord
+                ]);
+            }
+        }
 
-        // $ruas->coordinates()->saveMany($coords);
+        $ruas->coordinates()->saveMany($coords);
 
         return $this->successResponse($ruas, message: __('crud.success.update'));
     }
