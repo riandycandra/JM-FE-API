@@ -75,7 +75,7 @@ class RuasController extends Controller
 
         $ruas->save();
 
-        // $ruas->coordinates()->saveMany($coords);
+        $ruas->coordinates()->saveMany($coords);
 
         return $this->createdResponse($ruas);
     }
