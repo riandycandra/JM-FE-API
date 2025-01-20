@@ -14,6 +14,8 @@ use App\Models\RuasCoordinates;
 use App\Http\Requests\RuasRequest;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\UpdateRuasRequest;
+use GuzzleHttp\Client;
+use Throwable;
 
 class RuasController extends Controller
 {
@@ -34,7 +36,7 @@ class RuasController extends Controller
     {
 
         if($request->show == 'active_only') {
-            $data = Ruas::where('status', '1')->with('coordinates')->get();
+            $data = Ruas::where('status', '1')->get();
 
             return $this->successResponse($data);
         }
@@ -54,28 +56,28 @@ class RuasController extends Controller
         $ruas->long      = $request->long;
         $ruas->km_awal   = $request->km_awal;
         $ruas->km_akhir  = $request->km_akhir;
-        // $ruas->photo_url = $this->service->uploadFile($request->photo);
-        // $ruas->doc_url   = $this->service->uploadFile($request->file);
+        $ruas->photo_url = $this->service->uploadFile($request->photo);
+        $ruas->doc_url   = $this->service->uploadFile($request->file);
         $ruas->status    = $request->status;
 
         $unit = Unit::find($request->unit_id);
 
-        $coords = [];
+        // $coords = [];
 
-        if($request->coordinates) {
-            foreach($request->coordinates as $ordering => $coord) {
-                $coords[] = new RuasCoordinates([
-                    'ordering' => $ordering,
-                    'coordinates' => $coord
-                ]);
-            }
-        }
+        // if($request->coordinates) {
+        //     foreach($request->coordinates as $ordering => $coord) {
+        //         $coords[] = new RuasCoordinates([
+        //             'ordering' => $ordering,
+        //             'coordinates' => $coord
+        //         ]);
+        //     }
+        // }
 
         $ruas->unit()->associate($unit);
 
         $ruas->save();
 
-        $ruas->coordinates()->saveMany($coords);
+        // $ruas->coordinates()->saveMany($coords);
 
         return $this->createdResponse($ruas);
     }
@@ -85,7 +87,7 @@ class RuasController extends Controller
      */
     public function show(string $id)
     {
-        $data = Ruas::where('id', $id)->with('coordinates', 'unit')->first();
+        $data = Ruas::where('id', $id)->with('unit')->first();
 
         if($data == null) {
             return $this->errorResponse($data, __('crud.failed.get'), 404);
@@ -100,7 +102,7 @@ class RuasController extends Controller
     public function update(UpdateRuasRequest $request, string $id)
     {
         try {
-            $ruas = Ruas::where('id', $id)->with('coordinates')->first();
+            $ruas = Ruas::where('id', $id)->first();
         } catch (Exception|QueryException $e) {
             return $this->errorResponse([], 'Data not found.', 404);
         }
@@ -115,8 +117,8 @@ class RuasController extends Controller
         $ruas->km_akhir  = $request->km_akhir;
         $ruas->status    = $request->status;
 
-        // $ruas->photo_url = ($request->photo == null ? $ruas->photo_url : $this->service->uploadFile($request->photo));
-        // $ruas->doc_url   = ($request->file == null ? $ruas->doc_url : $this->service->uploadFile($request->file));
+        $ruas->photo_url = ($request->photo == null ? $ruas->photo_url : $this->service->uploadFile($request->photo));
+        $ruas->doc_url   = ($request->file == null ? $ruas->doc_url : $this->service->uploadFile($request->file));
 
         $unit = Unit::find($request->unit_id);
 
@@ -124,20 +126,20 @@ class RuasController extends Controller
 
         $ruas->save();
 
-        $ruas->coordinates()->delete();
+        // $ruas->coordinates()->delete();
 
-        $coords = [];
+        // $coords = [];
 
-        if($request->coordinates) {
-            foreach($request->coordinates as $ordering => $coord) {
-                $coords[] = new RuasCoordinates([
-                    'ordering' => $ordering,
-                    'coordinates' => $coord
-                ]);
-            }
-        }
+        // if($request->coordinates) {
+        //     foreach($request->coordinates as $ordering => $coord) {
+        //         $coords[] = new RuasCoordinates([
+        //             'ordering' => $ordering,
+        //             'coordinates' => $coord
+        //         ]);
+        //     }
+        // }
 
-        $ruas->coordinates()->saveMany($coords);
+        // $ruas->coordinates()->saveMany($coords);
 
         return $this->successResponse($ruas, message: __('crud.success.update'));
     }

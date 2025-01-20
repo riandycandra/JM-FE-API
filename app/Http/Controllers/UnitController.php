@@ -16,7 +16,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $data = Unit::all();
+        $data = Unit::with('ruas')->get();
 
         return $this->successResponse($data);
     }
