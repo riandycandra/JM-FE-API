@@ -34,7 +34,7 @@ class RuasController extends Controller
     {
 
         if($request->show == 'active_only') {
-            $data = Ruas::where('status', '1')->get();
+            $data = Ruas::where('status', '1')->with('coordinates')->get();
 
             return $this->successResponse($data);
         }
