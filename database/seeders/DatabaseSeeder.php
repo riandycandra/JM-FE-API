@@ -52,8 +52,6 @@ class DatabaseSeeder extends Seeder
                 'km_awal' => '1',
                 'km_akhir' => '34',
                 'status' => '1',
-                'photo_url' => 'test.jpg',
-                'doc_url' => 'test.pdf',
             ]);
         }
     }

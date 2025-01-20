@@ -19,8 +19,6 @@ return new class extends Migration
             $table->integer('long');
             $table->string('km_awal');
             $table->string('km_akhir');
-            $table->string('photo_url');
-            $table->string('doc_url');
             $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
