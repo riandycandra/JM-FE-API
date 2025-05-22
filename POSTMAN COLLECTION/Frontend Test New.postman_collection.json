@@ -215,22 +215,26 @@
 								{
 									"key": "coordinates[]",
 									"value": "-6.24748279114425,106.880469024181",
-									"type": "text"
+									"description": "not required",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "coordinates[]",
 									"value": "-6.43843787455533,107.467451691628",
-									"type": "text"
+									"description": "not required",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "photo",
 									"type": "file",
-									"src": []
+									"src": "postman-cloud:///1eff7e56-de35-4080-8cb8-7ef37a147de0"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": []
+									"src": "postman-cloud:///1efc1a09-5d02-48f0-b7ea-9fe29779ad0e"
 								}
 							]
 						},
@@ -293,12 +297,26 @@
 								{
 									"key": "coordinates[]",
 									"value": "-6.24748279114425,106.880469024181",
-									"type": "text"
+									"description": "not required",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "coordinates[]",
 									"value": "-6.43843787455533,107.467451691628",
-									"type": "text"
+									"description": "not required",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
 								}
 							]
 						},
