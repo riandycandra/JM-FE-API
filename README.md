@@ -3,7 +3,7 @@
 ## Prerequisites
 Make sure you've installed **Git**, **Docker** and **docker-compose** on your local machine
 
-## Step to run
+## Steps to run
 
  1. Clone this repository
 	 `git clone https://github.com/riandycandra/JM-FE-API.git`
@@ -16,3 +16,5 @@ Make sure you've installed **Git**, **Docker** and **docker-compose** on your lo
 
 The service will listen in `http://localhost:8004/`
 
+## How to test the API
+You can use POSTMAN and use collection & environment from **POSTMAN COLLECTION** folder
