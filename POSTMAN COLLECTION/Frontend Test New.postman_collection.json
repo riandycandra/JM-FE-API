@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "6499fb90-c9df-4321-aff1-de198c2ccaf3",
+		"name": "Frontend Test New",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36502909"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.environment.set('token', response.access_token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ruas",
+			"item": [
+				{
+					"name": "Get All Ruas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ruas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ruas"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "show",
+									"value": "active_only",
+									"description": "enable this to show all active item without pagination and show the coordinates",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Ruas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ruas/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ruas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ruas",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ruas/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ruas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Ruas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "unit_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "ruas_name",
+									"value": "Jakarta Cikampek",
+									"type": "text"
+								},
+								{
+									"key": "long",
+									"value": "94",
+									"type": "text"
+								},
+								{
+									"key": "km_awal",
+									"value": "2+000",
+									"type": "text"
+								},
+								{
+									"key": "km_akhir",
+									"value": "96+000",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "coordinates[]",
+									"value": "-6.24748279114425,106.880469024181",
+									"type": "text"
+								},
+								{
+									"key": "coordinates[]",
+									"value": "-6.43843787455533,107.467451691628",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ruas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ruas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ruas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "unit_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "ruas_name",
+									"value": "Jakarta Cikampek - Update",
+									"type": "text"
+								},
+								{
+									"key": "long",
+									"value": "94",
+									"type": "text"
+								},
+								{
+									"key": "km_awal",
+									"value": "2+000",
+									"type": "text"
+								},
+								{
+									"key": "km_akhir",
+									"value": "96+000",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"description": "1 = aktif, 0 = nonaktif",
+									"type": "text"
+								},
+								{
+									"key": "coordinates[]",
+									"value": "-6.24748279114425,106.880469024181",
+									"type": "text"
+								},
+								{
+									"key": "coordinates[]",
+									"value": "-6.43843787455533,107.467451691628",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ruas/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ruas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Routes Line",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "lnglat[]",
+									"value": "-6.24748279114425,106.880469024181",
+									"type": "text"
+								},
+								{
+									"key": "lnglat[]",
+									"value": "-6.43843787455533,107.467451691628",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ruas/generate-routes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ruas",
+								"generate-routes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Unit Kerja",
+			"item": [
+				{
+					"name": "Get All Unit Kerja",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/unit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"unit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
