@@ -8,7 +8,11 @@ use Google\Cloud\Storage\StorageClient;
 
 class UploadService
 {
-    public function uploadFile(UploadedFile $file) {
+    public function uploadFile(?UploadedFile $file) {
+
+        if($file == null) {
+            return null;
+        }
 
         $rand = Uuid::uuid4() . "." . $file->getClientOriginalExtension();
 
