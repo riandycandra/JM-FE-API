@@ -1,20 +1,48 @@
-# How to run
+# 🚀 JM-FE-API
 
-## Prerequisites
-Make sure you've installed **Git**, **Docker** and **docker-compose** on your local machine
+Welcome to the **JM-FE-API** project! This repository contains the services configured to run seamlessly using Docker.
 
-## Steps to run
+---
 
- 1. Clone this repository
-	 `git clone https://github.com/riandycandra/JM-FE-API.git`
-	 
- 2. Change working directory to the project
-	 `cd JM-FE-API`
-	 
- 3. Start the service with docker-compose
-	 `docker-compose up -d`
+## 📋 Prerequisites
 
-The service will listen in `http://localhost:8004/`
+Before you begin, ensure you have the following installed on your local machine:
 
-## How to test the API
-You can use POSTMAN and use collection & environment from **POSTMAN COLLECTION** folder
+- 🐙 [Git](https://git-scm.com/)
+- 🐳 [Docker](https://www.docker.com/get-started)
+- ⚙️ [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
+## 🛠️ Getting Started
+
+Follow these simple steps to get the service up and running locally:
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/riandycandra/JM-FE-API.git
+```
+
+### 2. Navigate to the project directory
+```bash
+cd JM-FE-API
+```
+
+### 3. Start the service
+Fire up the containers in the background using Docker Compose:
+```bash
+docker-compose up -d
+```
+
+🎉 **Success!** The service will now be listening at:  
+👉 [http://localhost:8004/](http://localhost:8004/)
+
+---
+
+## 🧪 Testing the API
+
+To explore and test the available endpoints efficiently:
+
+1. Open [Postman](https://www.postman.com/).
+2. Import the collection and environment files provided in the **`POSTMAN COLLECTION`** folder within this repository.
+3. Start sending requests!
