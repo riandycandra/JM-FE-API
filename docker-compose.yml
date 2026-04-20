@@ -25,9 +25,9 @@ services:
       - '8004:8181'
     environment:
       DATABASE_HOST: mysql
-      DATABASE_NAME: mydatabase
-      DATABASE_USER: myuser
-      DATABASE_PASSWORD: mypassword
+      DATABASE_NAME: laravel
+      DATABASE_USER: user_mysql
+      DATABASE_PASSWORD: pass_mysql
     depends_on:
       mysql:
         condition: service_healthy
